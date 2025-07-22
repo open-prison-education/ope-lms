@@ -27,9 +27,8 @@ if not "%BUILD_TYPE%"=="debug" if not "%BUILD_TYPE%"=="release" if not "%BUILD_T
 
 :: Setup paths
 set MSVC_BINARIES=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Redist\MSVC\%MSVC_VER%\x64\Microsoft.VC143.CRT
-set CODE_ROOT=%PROJECT_ROOT%\client_tools\lms\src\OPE_LMS
-set RELEASE_BUILD_DIR=%CODE_ROOT%\build\Desktop_Qt_%QT_VER_FOLDER%_MSVC%MSVC_MAJOR_VER%_64bit-Release\release
-set DEBUG_BUILD_DIR=%CODE_ROOT%\build\Desktop_Qt_%QT_VER_FOLDER%_MSVC%MSVC_MAJOR_VER%_64bit-Debug\debug
+set RELEASE_BUILD_DIR=%PROJECT_ROOT%\build\Desktop_Qt_%QT_VER_FOLDER%_MSVC%MSVC_MAJOR_VER%_64bit-Release\release
+set DEBUG_BUILD_DIR=%PROJECT_ROOT%\build\Desktop_Qt_%QT_VER_FOLDER%_MSVC%MSVC_MAJOR_VER%_64bit-Debug\debug
 
 :: Setup Qt environment if not already done
 if "%QT_ENV_SETUP%" NEQ "1" (
@@ -47,7 +46,7 @@ goto :debug_check
 
 :release
 echo Deploying Release build...
-%QT_PATH%\msvc%MSVC_MAJOR_VER%_64\bin\windeployqt.exe %TRANSLATIONS% --force --compiler-runtime --qmldir "%CODE_ROOT%" --libdir "%RELEASE_BUILD_DIR%" --dir "%RELEASE_BUILD_DIR%" --plugindir "%RELEASE_BUILD_DIR%\plugins" "%RELEASE_BUILD_DIR%\OPE_LMS.exe"
+%QT_PATH%\msvc%MSVC_MAJOR_VER%_64\bin\windeployqt.exe %TRANSLATIONS% --force --compiler-runtime --qmldir "%PROJECT_ROOT%" --libdir "%RELEASE_BUILD_DIR%" --dir "%RELEASE_BUILD_DIR%" --plugindir "%RELEASE_BUILD_DIR%\plugins" "%RELEASE_BUILD_DIR%\OPE_LMS.exe"
 echo "Copying MSVC Binaries to %RELEASE_BUILD_DIR%"
 xcopy /Y "%MSVC_BINARIES%\*" "%RELEASE_BUILD_DIR%"
 
@@ -58,7 +57,7 @@ goto :end
 
 :debug
 echo Deploying Debug build...
-%QT_PATH%\msvc%MSVC_MAJOR_VER%_64\bin\windeployqt.exe %TRANSLATIONS% --force --compiler-runtime --qmldir "%CODE_ROOT%" --libdir "%DEBUG_BUILD_DIR%" --dir "%DEBUG_BUILD_DIR%" --plugindir "%DEBUG_BUILD_DIR%\plugins" "%DEBUG_BUILD_DIR%\OPE_LMS.exe"
+%QT_PATH%\msvc%MSVC_MAJOR_VER%_64\bin\windeployqt.exe %TRANSLATIONS% --force --compiler-runtime --qmldir "%PROJECT_ROOT%" --libdir "%DEBUG_BUILD_DIR%" --dir "%DEBUG_BUILD_DIR%" --plugindir "%DEBUG_BUILD_DIR%\plugins" "%DEBUG_BUILD_DIR%\OPE_LMS.exe"
 echo "Copying MSVC Binaries to %DEBUG_BUILD_DIR%"
 xcopy /Y "%MSVC_BINARIES%\*" "%DEBUG_BUILD_DIR%"
 
