@@ -8,15 +8,11 @@ This guide provides step-by-step instructions for building QtWebEngine on Window
 1. **Qt 6.8.3**
 2. **Visual Studio Community 2022**
 3. **Node.js**
-4. **Python 3** with html5lib
+4. **Python 3** with html5lib, spdx_tools
 5. **Gperf** (install via Chocolatey)
    ```powershell
    choco install gperf
    ```
-6. **Win Flex-Bison**
-   - Download from [SourceForge](https://sourceforge.net/projects/winflexbison/)
-   - Copy to Program Files
-   - Add to system PATH
 7. **Bison** 
    - Download from [SourceForge](https://sourceforge.net/projects/gnuwin32/)
    - Add to system PATH
@@ -51,7 +47,7 @@ Open a new Command Prompt (cmd) and set the following environment variables. Adj
 
 ```batch
 set QT_PATH=C:\Qt\6.8.3
-set PYTHONPATH=C:\Users\Administrator\AppData\Local\Programs\Python\Python313\
+set PYTHONPATH=C:\Users\Administrator\AppData\Local\Programs\Python\Python312\
 set VC_EDITION=Community
 set MSVC_VER=14.44.35207
 set MSVC_MAJOR_VER=2022
@@ -70,12 +66,25 @@ rem Initialize Visual Studio Environment
 ```
 
 ### 5. Build QtWebEngine
+
 ```batch
 cd build
-qt-configure-module . -webengine-proprietary-codecs -webengine-pepper-plugins -webengine-printing-and-pdf -webengine-spellchecker
+qt-configure-module .. -webengine-proprietary-codecs -- -DQT_SHOW_EXTRA_IDE_SOURCES=OFF
+```
+
+Apply the patch below in the Troubleshooting section or change file directly to avoid `cppgc::internal::MarkingStateBase::MarkNoPush` issue.
+
+The build step is lengthy and may take several hours to complete.
+
+```batch
 cmake --build . --parallel --clean-first
-cmake --install .
-cmake --install . --config debug
+```
+
+open `cmake_install.cmake` and make sure that `CMAKE_INSTALL_PREFIX` path is correct.
+
+```batch
+cmake --install . --config Release
+cmake --install . --config Debug
 ```
 
 ## Troubleshooting
@@ -86,12 +95,11 @@ If you encounter the error:
 error C2352: 'cppgc::internal::MarkingStateBase::MarkNoPush': a call of a non-static member function requires an object
 ```
 
-#### Solution 1: Using Compiler Flag
-```batch
-qt-configure-module . -webengine-proprietary-codecs -webengine-pepper-plugins -webengine-printing-and-pdf -webengine-spellchecker -- -DCMAKE_CXX_FLAGS="/D_ALLOW_QUALIFIED_MEMBER_ACCESS=1"
-```
 
-#### Solution 2: Using Patch
+#### Using Patch
+
+within the build directory
+
 1. Create patches directory:
    ```batch
    mkdir patches
@@ -102,12 +110,14 @@ qt-configure-module . -webengine-proprietary-codecs -webengine-pepper-plugins -w
    diff --git a/src/3rdparty/chromium/v8/src/heap/cppgc/marking-state.h b/src/3rdparty/chromium/v8/src/heap/cppgc/marking-state.h
    --- a/src/3rdparty/chromium/v8/src/heap/cppgc/marking-state.h
    +++ b/src/3rdparty/chromium/v8/src/heap/cppgc/marking-state.h
-   @@ -361,1 +361,1 @@
+   @@ -345,1 +345,1 @@
    -    return MutatorMarkingState::BasicMarkingState::MarkNoPush(header);
    +    return this->BasicMarkingState::MarkNoPush(header);
    ```
 
 3. Apply the patch:
    ```batch
-   git apply patches/marking-state.patch
+   git apply --verbose patches/marking-state.patch
    ```
+
+if that fails, modify the file within build directory `/src/3rdparty/chromium/v8/src/heap/cppgc/marking-state.h` directly.
