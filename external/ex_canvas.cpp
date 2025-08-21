@@ -3621,40 +3621,22 @@ QString EX_Canvas::ProcessSMCDocuments(QString content)
 QString EX_Canvas::ProcessDownloadLinks(QString content)
 {
     QString ret = content;
-    // Search content for any file links to canvas files
-
-    // Key will be full_url followed by the list of items
-    //replace_urls[full_url] = QStringList() << file_id << course_id << canvas_host;
-    QHash<QString, QStringList> replace_urls;
-
-    //QRegExp rx;
     QRegularExpression rx;
 
-    // // Example link of image file embedded in this page/text
-    // <img src="https://canvas.ed/courses/21647000000303/files/21647000019197/preview" alt="Misleading Graphs_Page_01.jpg" data-api-endpoint="https://canvas.ed/api/v1/courses/21647000000303/files/21647000019197" data-api-returntype="File" />
-
+    // Example link of image file embedded in this page/text
+    // <img src="https://canvas.hostexample.com/courses/392419000000049/files/392419000017042/preview" alt="Misleading Graphs_Page_01.jpg" data-api-endpoint="https://canvas.hostexample.com/api/v1/courses/21647000000303/files/21647000019197" data-api-returntype="File" />
 
     // Find download links
     // [\s>'\"]?((https?:\/\/[a-zA-Z\.0-9:]*)?(\/api\/v1)?\/courses\/([0-9]+)\/(files|modules\/items)\/([0-9]+)(\/download|\/preview)?([\?]?[;=&0-9a-zA-Z%_]+)?)[\s<'\"]?
     rx.setPattern("[\\s>'\\\"]?((https?:\\/\\/[a-zA-Z\\.0-9:]*)?(\\/api\\/v1)?\\/courses\\/([0-9]+)\\/(files|modules\\/items)\\/([0-9]+)(\\/download|\\/preview)?([\\?]?[;=&0-9a-zA-Z%_]+)?)[\\s<'\\\"]?");
-
-    // rx.cap(0) = full match
-    // 1 = full url - https://smc.ed/media/player.load/3f0s98foeu/
-    // 2 = server - https://smc.ed
-    // 3 = /api/v1
-    // 4 = course id
-    // 5 = /files/ or modules/items
-    // 6 = file id
-    // 7 = /download if present
-    // 8 = ? full query string if present
 
     QRegularExpressionMatchIterator it = rx.globalMatchView(ret);
 
     while (it.hasNext()) {
         QRegularExpressionMatch match = it.next();
 
-        int start_pos = match.capturedStart(1);
-        int match_len = match.captured(1).length();
+        // match example
+        // QList("\"https://canvas.hostexample.com/courses/392419000000049/files/392419000017042/preview?verifier=xxxx\"", "https://canvas.hostexample.com/courses/392419000000049/files/392419000017042/preview?verifier=xxxx", "https://canvas.hostexample.com", "", "392419000000049", "files", "392419000017042", "/preview", "?verifier=xxxx")
 
         // Get the full URL for this item
         QString full_url = match.captured(1);
@@ -3694,7 +3676,7 @@ QString EX_Canvas::ProcessDownloadLinks(QString content)
                 qDebug() << " *** DB ERROR - couldn't pull module item for " << module_item_id << " " << file_query.lastError() << " - " << full_url;
 
                 // Replace with dummy link so we can move on or we will get stuck in a loop.
-                ret = ret.replace(start_pos, match_len, "<INVALID_MODULE_ITEM_" + module_item_id + ">");
+                ret = ret.replace(full_url, "<INVALID_MODULE_ITEM_" + module_item_id + ">");
 
                 // Jump to next item.
                 continue;
@@ -3711,84 +3693,12 @@ QString EX_Canvas::ProcessDownloadLinks(QString content)
             QString new_url = "<CANVAS_FILE_" + file_id + ">";
 
             qDebug() << "Replacing " << full_url << " with " << new_url;
-            ret = ret.replace(start_pos, match_len, new_url);
+            ret = ret.replace(full_url, new_url);
         } else {
             // This link already points to a local host address?
             qDebug() << "-- Link found w localhost address? " << full_url;
         }
     }
-
-    // int pos = 0;
-    // while ((pos = rx.indexIn(ret, pos)) != -1) {
-    //     // Save the current match - use the position of the url, not the whole match
-    //     // This is important so we don't loose quotes or other whitespace if it exists
-    //     int start_pos = rx.pos(1);
-    //     int match_len = rx.cap(1).length();
-
-    //     //pos += rx.matchedLength();
-    //     // Use inline replacement later, so always start at pos 0
-    //     pos = 0;
-
-    //     // Get the full URL for this item
-    //     QString full_url = rx.cap(1);
-    //     qDebug() << "<<<<< FOUND URL " << full_url;
-    //     // Get the host for this link
-    //     QString canvas_host = rx.cap(2);
-    //     if (canvas_host == "") {
-    //         // For relative links - fill in current host
-    //         canvas_host = canvas_url;
-    //     }
-    //     // Get the course id for this link
-    //     QString course_id = rx.cap(4);
-    //     // Get url type (files or modules/items)
-    //     QString canvas_types = rx.cap(5);
-    //     // Get the file id
-    //     QString file_id = rx.cap(6);
-    //     QString module_item_id = "";
-
-    //     if (canvas_types == "modules/items") {
-    //         // Need to lookup the file_id, this is the module item id
-    //         module_item_id = file_id;
-    //         file_id = "";
-    //         QSqlQuery file_query;
-    //         file_query.prepare("SELECT content_id FROM module_items WHERE id=:item_id");
-    //         file_query.bindValue(":item_id", module_item_id);
-    //         if (!file_query.exec()) {
-    //             qDebug() << "SQL Error - file lookup " << file_query.lastError();
-    //         } else {
-    //             while(file_query.next()) {
-    //                 file_id = file_query.value("content_id").toString();
-    //             }
-    //         }
-
-    //         if (file_id == "") {
-    //             // didn't find file, move on.
-    //             qDebug() << " *** DB ERROR - couldn't pull module item for " << module_item_id << " " << file_query.lastError() << " - " << full_url;
-
-    //             // Replace with dummy link so we can move on or we will get stuck in a loop.
-    //             ret = ret.replace(start_pos, match_len, "<INVALID_MODULE_ITEM_" + module_item_id + ">");
-
-    //             // Jump to next item.
-    //             continue;
-    //         }
-    //     }
-
-    //     // Add to the list to be downloaded
-    //     if (!_localhost_url.startsWith(canvas_host)) {
-    //         // Add this to the download list later
-    //         QueueCanvasLinkForDownload(file_id, course_id, canvas_host, full_url);
-
-    //         // Replace this text with the place holder.
-    //         // <CANVAS_FILE_???>  ??? becomes the file id
-    //         QString new_url = "<CANVAS_FILE_" + file_id + ">";
-
-    //         qDebug() << "Replacing " << full_url << " with " << new_url;
-    //         ret = ret.replace(start_pos, match_len, new_url);
-    //     } else {
-    //         // This link already points to a local host address?
-    //         qDebug() << "-- Link found w localhost address? " << full_url;
-    //     }
-    // }
 
     return ret;
 }
