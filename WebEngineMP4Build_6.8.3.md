@@ -83,7 +83,7 @@ cmake --build . --parallel --clean-first
 open `cmake_install.cmake` and make sure that `CMAKE_INSTALL_PREFIX` path is correct.
 
 ```batch
-cmake --install . --config Release
+cmake --install . --config RelWithDebInfo
 cmake --install . --config Debug
 ```
 
