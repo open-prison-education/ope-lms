@@ -47,7 +47,7 @@ Open a new Command Prompt (cmd) and set the following environment variables. Adj
 
 ```batch
 set QT_PATH=C:\Qt\6.8.3
-set PYTHONPATH=C:\Users\Administrator\AppData\Local\Programs\Python\Python312\
+set PYTHONPATH=C:\Users\<user_name>\AppData\Local\Programs\Python\Python312\
 set VC_EDITION=Community
 set MSVC_VER=14.44.35207
 set MSVC_MAJOR_VER=2022
