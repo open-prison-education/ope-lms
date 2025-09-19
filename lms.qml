@@ -13,7 +13,9 @@ import QtWebSockets 1.1
 import cm.WebSocketTransport 1.0
 
 import com.openprisoneducation.ope 1.0
-import "App.js" as App
+import "resources/scripts/App.js" as App
+import "qml/pages" as Pages
+import "qml/components" as Components
 
 ApplicationWindow {
     visible: true;
@@ -1352,7 +1354,7 @@ ApplicationWindow {
 
 
 
-                                AppSideBar {
+                                Pages.AppSideBar {
                                     id: appSideBar
                                     anchors.fill: parent
 
@@ -1495,7 +1497,7 @@ ApplicationWindow {
     Component {
 
         id: appHomePageView
-        AppHomePage {
+        Pages.AppHomePage {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1677,7 +1679,7 @@ ApplicationWindow {
             Layout.fillHeight: true;
             color: App.page_bg_color;
 
-            AppSyncPage {
+            Pages.AppSyncPage {
                 //anchors.fill: parent;
                 width: syncDrawer.width;
                 height: syncDrawer.height;
