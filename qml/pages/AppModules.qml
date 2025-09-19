@@ -13,7 +13,7 @@ import QtWebView 1.1
 import Qt.labs.platform 1.1
 
 import com.openprisoneducation.ope 1.0
-import "App.js" as App
+import "../../resources/scripts/App.js" as App
 
 
 Page {

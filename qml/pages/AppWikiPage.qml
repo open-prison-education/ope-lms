@@ -10,7 +10,7 @@ import QtWebView 1.1
 import QtWebEngine 1.10
 
 import com.openprisoneducation.ope 1.0
-import "App.js" as App
+import "../../resources/scripts/App.js" as App
 
 Page {
     property QtObject global;

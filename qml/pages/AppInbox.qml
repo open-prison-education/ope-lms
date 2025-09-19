@@ -9,8 +9,8 @@ import QtQuick.Layouts 1.15
 import QtWebView 1.1
 
 import com.openprisoneducation.ope 1.0
-import "App.js" as App
-import "moment-with-locales-2.26.0.js" as Moment
+import "../../resources/scripts/App.js" as App
+import "../../resources/scripts/moment-with-locales-2.26.0.js" as Moment
 
 Page {
     id: page
