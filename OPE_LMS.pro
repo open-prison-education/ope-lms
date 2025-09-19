@@ -44,67 +44,38 @@ for(tsfile, TRANSLATIONS) {
 # Enable console so we can print to stdout
 CONFIG += console
 
-SOURCES += main.cpp \
-    cm/file/cm_fileinfo.cpp \
-    cm/file/cm_syncfile.cpp \
-    cm/file/cm_syncfilechunk.cpp \
-    cm/file/cm_syncfileversion.cpp \
-    cm/school/sc_classes.cpp \
-    cm/school/sc_classmodel.cpp \
-    cm/school/sc_lessonitem.cpp \
-    cm/school/sc_lessonitemmodel.cpp \
-    cm/school/sc_modulemodel.cpp \
-    cm/school/sc_modules.cpp \
-    cm/school/sc_programmodel.cpp \
-    cm/school/sc_programs.cpp \
+SOURCES += src/main.cpp \
+    src/appmodule.cpp \
+    src/customlogger.cpp \
+    src/db.cpp \
+    src/openetworkaccessmanagerfactory.cpp \
     cm/cm_classroom.cpp \
     cm/cm_database.cpp \
     cm/cm_httpserver.cpp \
-    cm/cm_machine.cpp \
-    cm/cm_mimetypes.cpp \
-    cm/cm_persistentobject.cpp \
-    cm/cm_persistentobjectmodel.cpp \
-    cm/cm_screengrab.cpp \
-    cm/cm_sequentialguid.cpp \
-    cm/cm_users.cpp \
-    cm/cm_webrequest.cpp \
-    customlogger.cpp \
-    external/ex_canvas.cpp \
-    external/ex_ldap.cpp \
-    appmodule.cpp \
-    db.cpp \
-    openetworkaccessmanagerfactory.cpp \
-    cm/file/cm_fileinfo.cpp \
-    cm/file/cm_syncfile.cpp \
-    cm/file/cm_syncfilechunk.cpp \
-    cm/file/cm_syncfileversion.cpp \
-    cm/school/sc_classes.cpp \
-    cm/school/sc_classmodel.cpp \
-    cm/school/sc_lessonitem.cpp \
-    cm/school/sc_lessonitemmodel.cpp \
-    cm/school/sc_modulemodel.cpp \
-    cm/school/sc_modules.cpp \
-    cm/school/sc_programmodel.cpp \
-    cm/school/sc_programs.cpp \
-    cm/cm_classroom.cpp \
-    cm/cm_database.cpp \
-    cm/cm_httpserver.cpp \
-    cm/cm_machine.cpp \
-    cm/cm_mimetypes.cpp \
-    cm/cm_persistentobject.cpp \
-    cm/cm_persistentobjectmodel.cpp \
-    cm/cm_screengrab.cpp \
-    cm/cm_sequentialguid.cpp \
-    cm/cm_users.cpp \
-    cm/cm_webrequest.cpp \
-    external/ex_canvas.cpp \
-    external/ex_ldap.cpp \
-    appmodule.cpp \
-    db.cpp \
-    main.cpp \
-    openetworkaccessmanagerfactory.cpp \
     cm/cm_javascripthandler.cpp \
-    cm/cm_websockettransport.cpp
+    cm/cm_machine.cpp \
+    cm/cm_mimetypes.cpp \
+    cm/cm_persistentobject.cpp \
+    cm/cm_persistentobjectmodel.cpp \
+    cm/cm_screengrab.cpp \
+    cm/cm_sequentialguid.cpp \
+    cm/cm_users.cpp \
+    cm/cm_webrequest.cpp \
+    cm/cm_websockettransport.cpp \
+    cm/file/cm_fileinfo.cpp \
+    cm/file/cm_syncfile.cpp \
+    cm/file/cm_syncfilechunk.cpp \
+    cm/file/cm_syncfileversion.cpp \
+    cm/school/sc_classes.cpp \
+    cm/school/sc_classmodel.cpp \
+    cm/school/sc_lessonitem.cpp \
+    cm/school/sc_lessonitemmodel.cpp \
+    cm/school/sc_modulemodel.cpp \
+    cm/school/sc_modules.cpp \
+    cm/school/sc_programmodel.cpp \
+    cm/school/sc_programs.cpp \
+    src/ex_canvas.cpp \
+    src/ex_ldap.cpp
 
 RESOURCES += qml.qrc
 
@@ -135,6 +106,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    src/appmodule.h \
+    src/customlogger.h \
+    src/db.h \
+    src/openetworkaccessmanagerfactory.h \
     cm/file/cm_fileinfo.h \
     cm/file/cm_syncfile.h \
     cm/file/cm_syncfilechunk.h \
@@ -150,6 +125,7 @@ HEADERS += \
     cm/cm_classroom.h \
     cm/cm_database.h \
     cm/cm_httpserver.h \
+    cm/cm_javascripthandler.h \
     cm/cm_machine.h \
     cm/cm_mimetypes.h \
     cm/cm_persistentobject.h \
@@ -158,79 +134,31 @@ HEADERS += \
     cm/cm_sequentialguid.h \
     cm/cm_users.h \
     cm/cm_webrequest.h \
-    external/ex_canvas.h \
-    external/ex_ldap.h \
-    appmodule.h \
-    db.h \
-    openetworkaccessmanagerfactory.h \
-    cm/cm_javascripthandler.h \
     cm/cm_websockettransport.h \
-    customlogger.h
+    src/ex_canvas.h \
+    src/ex_ldap.h
 
 
-RC_ICONS = logo_icon.ico
+RC_ICONS = resources/images/logo_icon.ico
 
 DISTFILES += \
     Announcements.qml \
     App.js \
-    AppAnnouncements.qml \
-    AppAssignmentPage.qml \
-    AppAssignments.qml \
-    AppConversation.qml \
-    AppCourseSelector.qml \
-    AppDashboardPage.qml \
-    AppDiscussions.qml \
-    AppFiles.qml \
-    AppHomePage.qml \
-    AppInbox.qml \
-    AppMessage.qml \
-    AppModules.qml \
-    AppPages.qml \
-    AppQuizzes.qml \
-    AppSideBar.qml \
-    AppSyncPage.qml \
-    AppWikiPage.qml \
-    BuildInstructions.md \
-    QQ_MultipleChoiceAnswer.qml \
-    QQ_TrueFalseAnswer.qml \
-    QuizQuestion.qml \
+    lms.qml \
+    not_credentialed.qml \
+    qt.conf \
+    qtquickcontrols2.conf \
     WebEngineMP4Build_6.5.1.cmd \
     WebEngineMP4Build_6.5.2.cmd \
     WebEngineMP4Build_6.8.0.cmd \
     WebEngineMP4Build_6.8.3.cmd \
-    dropTest.qml \
-    lms.qml \
-    not_credentialed.qml \
-    qt.conf \
-    blue-folder.png \
-    Scratch.txt \
-    blue_sync.png \
-    qtquickcontrols2.conf \
-    upload_file.png \
-    sync.png \
-    logo_icon.png \
-    logo_icon.ico \
-    down_arrow.png \
-    up_arrow.png \
     WebEngineMP4Build.cmd \
-    websockettest.qml \
-    qwebchannel.js \
-    wc_index.html \
-    opeWebViewClient.js \
     win_deploy.cmd \
-    mail.png \
-    mail_open.png \
-    box.png \
-    default_avatar.png \
-    reply.png \
-    new_message.png \
-    StyledButton.qml \
-    ReplyPopup.qml \
-    NewMessagePopup.qml \
     win_deploy_6.5.2.cmd \
     win_deploy_6.5.3.cmd \
     win_deploy_6.8.0.cmd \
-    win_deploy_6.8.3.cmd
+    win_deploy_6.8.3.cmd \
+    BuildInstructions.md
 
 
 
@@ -269,10 +197,10 @@ INCLUDEPATH += "$${OPEN_SSL_PATH}/include"
 
 # Make sure we have files copied to the build folder
 copy_files.commands = $(COPY_DIR) \"$$shell_path($$PWD\\www_content)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\logo_icon.ico)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
+    $(COPY_FILE) \"$$shell_path($$PWD\\resources\\images\\logo_icon.ico)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
     $(COPY_FILE) \"$$shell_path($$PWD\\favicon.ico)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\qwebchannel.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\opeWebViewClient.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
+    $(COPY_FILE) \"$$shell_path($$PWD\\resources\\scripts\\qwebchannel.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
+    $(COPY_FILE) \"$$shell_path($$PWD\\resources\\scripts\\opeWebViewClient.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
     $(COPY_FILE) \"$$shell_path($$PWD\\mime_types.csv)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
     $(COPY_FILE) \"$$shell_path($$PWD\\qt.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
     $(COPY_FILE) \"$$shell_path($$PWD\\qtquickcontrols2.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\"
