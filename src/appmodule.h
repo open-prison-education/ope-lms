@@ -54,7 +54,7 @@
 
 #include "db.h"
 
-#include "external/ex_canvas.h"
+#include "ex_canvas.h"
 
 
 /**

@@ -13,11 +13,11 @@
 #include <QStandardPaths>
 #include <QCryptographicHash>
 
-#include "../db.h"
+#include "db.h"
 #include "cm/cm_httpserver.h"
 #include "cm/cm_webrequest.h"
 #include "cm/cm_users.h"
-#include "../customlogger.h"
+#include "customlogger.h"
 
 class EX_Canvas : public QObject
 {
