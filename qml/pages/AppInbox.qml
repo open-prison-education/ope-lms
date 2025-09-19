@@ -11,6 +11,8 @@ import QtWebView 1.1
 import com.openprisoneducation.ope 1.0
 import "../../resources/scripts/App.js" as App
 import "../../resources/scripts/moment-with-locales-2.26.0.js" as Moment
+import "../components" as Components
+import "." as Pages
 
 Page {
     id: page
@@ -229,7 +231,7 @@ Page {
             }
 
             delegate: Component {
-                AppConversation {
+                Pages.AppConversation {
 
                     onConversationClicked: {
                         console.log("Conversation Clicked: " + conversation_id);
@@ -341,7 +343,7 @@ Page {
 //            }
 
             delegate:
-            AppMessage {
+            Pages.AppMessage {
 
                 /*onMessageClicked: {
                     console.log("Message Clicked: " + message_id);
@@ -374,7 +376,7 @@ Page {
     }
 
 
-    ReplyPopup {
+    Components.ReplyPopup {
         id: replyPopup
         parent: page // Overlay.overlay;
 
@@ -391,7 +393,7 @@ Page {
         }
     }
 
-    NewMessagePopup {
+    Components.NewMessagePopup {
         id: newMessagePopup
         parent: page;
 

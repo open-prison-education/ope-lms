@@ -10,6 +10,7 @@ import QtWebView 1.1
 
 import com.openprisoneducation.ope 1.0
 import "../../resources/scripts/App.js" as App
+import "." as Pages
 
 /*
 
@@ -111,7 +112,7 @@ Page {
 
     Component {
         id: pageView
-        AppWikiPage {
+        Pages.AppWikiPage {
             global: appHomePage.global;
             current_course_id: appHomePage.current_course_id;
             current_page_url: appHomePage.current_page_url;
@@ -120,7 +121,7 @@ Page {
 
     Component {
         id: modulesView
-        AppModules {
+        Pages.AppModules {
             global: appHomePage.global;
             current_assignment_id: appHomePage.current_assignment_id
             current_course_id: appHomePage.current_course_id

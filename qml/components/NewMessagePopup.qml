@@ -9,7 +9,8 @@ import QtQuick.Layouts 1.15
 import QtWebView 1.1
 
 //import com.openprisoneducation.ope 1.0
-import "App.js" as App
+import "../../resources/scripts/App.js" as App
+import "." as Components
 
 
 Popup {
@@ -99,7 +100,7 @@ Popup {
             Layout.preferredWidth: parent.width;
             Layout.fillWidth: false
 
-            StyledButton {
+            Components.StyledButton {
 
                 id: cancelNewMessage
                 text: "Cancel"
@@ -110,7 +111,7 @@ Popup {
                 }
             }
 
-            StyledButton {
+            Components.StyledButton {
                 id: saveNewMessage
                 text: "Send"
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
