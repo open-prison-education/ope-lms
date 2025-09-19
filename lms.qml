@@ -208,7 +208,7 @@ ApplicationWindow {
                     Layout.preferredHeight: parent.height
                     Layout.minimumWidth: width
 
-                    AppCourseSelector {
+                    Pages.AppCourseSelector {
                         id: appCourseSelector;
                         anchors.fill: parent;
                         global: main_window;
@@ -1471,7 +1471,7 @@ ApplicationWindow {
 
     Component {
         id: appDashboardView
-        AppDashboardPage {
+        Pages.AppDashboardPage {
             global: main_window;
 
             onCourseClicked: (course_id, course_name, course_code) => {
@@ -1511,7 +1511,7 @@ ApplicationWindow {
 
     Component {
         id: appWikiPageView
-        AppWikiPage {
+        Pages.AppWikiPage {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1523,7 +1523,7 @@ ApplicationWindow {
 
     Component {
         id: appPagesView
-        AppPages {
+        Pages.AppPages {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1539,7 +1539,7 @@ ApplicationWindow {
 
     Component {
         id: appFilesView
-        AppFiles {
+        Pages.AppFiles {
             global: main_window;
             current_course_id: main_window.current_course_id
             Component.onCompleted: {
@@ -1550,7 +1550,7 @@ ApplicationWindow {
 
     Component {
         id: appAssignmentsListView
-        AppAssignments {
+        Pages.AppAssignments {
             global: main_window;
             current_assignent_id: main_window.current_assignment_id;
             current_course_id: main_window.current_course_id;
@@ -1567,7 +1567,7 @@ ApplicationWindow {
 
     Component {
         id: appAssignmentPage
-        AppAssignmentPage {
+        Pages.AppAssignmentPage {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_assignment_id: main_window.current_assignment_id;
@@ -1580,7 +1580,7 @@ ApplicationWindow {
 
     Component {
         id: appModulesListView
-        AppModules {
+        Pages.AppModules {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1604,7 +1604,7 @@ ApplicationWindow {
 
     Component {
         id: appAnnouncementsView
-        AppAnnouncements {
+        Pages.AppAnnouncements {
             global: main_window;
             current_course_id: main_window.current_course_id;
             Component.onCompleted: {
@@ -1615,7 +1615,7 @@ ApplicationWindow {
 
     Component {
         id: appInboxView
-        AppInbox {
+        Pages.AppInbox {
             global: main_window;
             current_course_id: main_window.current_course_id;
             Component.onCompleted: {
@@ -1627,7 +1627,7 @@ ApplicationWindow {
 
     Component {
         id: appQuizzesView
-        AppQuizzes {
+        Pages.AppQuizzes {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_quiz_id: main_window.current_quiz_id;
@@ -1643,7 +1643,7 @@ ApplicationWindow {
 
     Component {
         id: appDiscussionsView
-        AppDiscussions {
+        Pages.AppDiscussions {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_discussion_id: main_window.current_discussion_id;
