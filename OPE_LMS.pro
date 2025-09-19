@@ -142,7 +142,6 @@ HEADERS += \
 RC_ICONS = resources/images/logo_icon.ico
 
 DISTFILES += \
-    Announcements.qml \
     App.js \
     lms.qml \
     not_credentialed.qml \
