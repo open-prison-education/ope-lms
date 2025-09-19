@@ -1,5 +1,5 @@
 #include "ex_canvas.h"
-#include "../appmodule.h"
+#include "appmodule.h"
 
 EX_Canvas::EX_Canvas(QObject *parent, APP_DB *db, QSettings *app_settings, QString localhost_url) :
     QObject(parent)
