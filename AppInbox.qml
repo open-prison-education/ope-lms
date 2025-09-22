@@ -10,7 +10,7 @@ import QtWebView 1.1
 
 import com.openprisoneducation.ope 1.0
 import "App.js" as App
-import "moment-with-locales-2.26.0.js" as Moment
+// Removed heavy Moment.js dependency
 
 Page {
     id: page
@@ -93,7 +93,8 @@ Page {
         new_record["id"] = "<queued>";
         new_record["body"] = reply_text;
         new_record["author_id"] = "??";
-        new_record["created_at"] = moment.utc().format();
+        // Store UTC timestamp in ISO 8601 without Moment.js
+        new_record["created_at"] = new Date().toISOString();
         new_record["generated"] = "";
         new_record["forwarded_messages"] = "[]";
         new_record["attachments"] = "[]";

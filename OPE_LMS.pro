@@ -268,14 +268,17 @@ INCLUDEPATH += "$${OPEN_SSL_PATH}/include"
 
 
 # Make sure we have files copied to the build folder
-copy_files.commands = $(COPY_DIR) \"$$shell_path($$PWD\\www_content)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\logo_icon.ico)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\favicon.ico)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\qwebchannel.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\opeWebViewClient.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\mime_types.csv)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\qt.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\qtquickcontrols2.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\"
+copy_files.commands = $(COPY_DIR) "$$shell_path($$PWD\www_content\video-js)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\video-js)" && \
+    $(COPY_DIR) "$$shell_path($$PWD\www_content\ViewerJS)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\ViewerJS)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\www_content\player.html)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\www_content\jquery-min.js)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\logo_icon.ico)" "$$shell_path($$OUT_PWD\$$VARIANT\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\favicon.ico)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\qwebchannel.js)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\opeWebViewClient.js)" "$$shell_path($$OUT_PWD\$$VARIANT\web_content\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\mime_types.csv)" "$$shell_path($$OUT_PWD\$$VARIANT\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\qt.conf)" "$$shell_path($$OUT_PWD\$$VARIANT\)" && \
+    $(COPY_FILE) "$$shell_path($$PWD\qtquickcontrols2.conf)" "$$shell_path($$OUT_PWD\$$VARIANT\)"
 
     #$(COPY_DIR) \"$$shell_path($${OPEN_SSL_DLL_PATH}\\*.dll)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\lib\\)\"
 

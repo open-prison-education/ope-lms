@@ -10,7 +10,7 @@ import QtWebView 1.1
 
 import com.openprisoneducation.ope 1.0
 import "App.js" as App
-import "moment-with-locales-2.26.0.js" as Moment
+// Removed heavy Moment.js dependency
 
 Item {
     id: element
@@ -108,7 +108,7 @@ Item {
             id: txtLastMessageTime
             width: 200
             height: 21
-            text: qsTr( moment(last_message_time).format('LLLL'));
+            text: Qt.formatDateTime(new Date(last_message_time), Qt.DefaultLocaleLongDate);
             verticalAlignment: Text.AlignVCenter
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop

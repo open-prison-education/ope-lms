@@ -22,7 +22,6 @@
         <file>AppInbox.qml</file>
         <file>AppConversation.qml</file>
         <file>AppMessage.qml</file>
-        <file>moment-with-locales-2.26.0.js</file>
         <file>StyledButton.qml</file>
         <file>ReplyPopup.qml</file>
         <file>NewMessagePopup.qml</file>
