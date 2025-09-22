@@ -29,7 +29,7 @@
         <file>qml/quiz/QQ_MultipleChoiceAnswer.qml</file>
         <file>qml/pages/AppQuizzes.qml</file>
         <file>qml/pages/AppDiscussions.qml</file>
-        <file>translations_en.qm</file>
+        <file>translations/translations_en.qm</file>
         <file>qml/pages/AppDashboardPage.qml</file>
     </qresource>
     <qresource prefix="/">
