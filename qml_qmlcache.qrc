@@ -23,7 +23,6 @@
         <file alias="AppInbox.qml">AppInbox.qml</file>
         <file alias="AppConversation.qml">AppConversation.qml</file>
         <file alias="AppMessage.qml">AppMessage.qml</file>
-        <file alias="moment-with-locales-2.26.0.js">moment-with-locales-2.26.0.js</file>
         <file alias="StyledButton.qml">StyledButton.qml</file>
         <file alias="ReplyPopup.qml">ReplyPopup.qml</file>
         <file alias="NewMessagePopup.qml">NewMessagePopup.qml</file>
