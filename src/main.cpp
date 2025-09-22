@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
     // NOTE: Need this right after GUI App creation? QtWebengine init earlier?
     QtWebView::initialize();
 
-    app.setWindowIcon(QIcon(":/images/logo_icon.ico"));
+    app.setWindowIcon(QIcon(":/resources/images/logo_icon.ico"));
 
     QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
 

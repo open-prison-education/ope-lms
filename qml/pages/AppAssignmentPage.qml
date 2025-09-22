@@ -135,7 +135,7 @@ Page {
                         Layout.minimumHeight: parent.implicitHeight
                         Layout.minimumWidth: paintedWidth
                         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        source: submissionDrawer.is_open ? "qrc:/images/down_arrow.png" : "qrc:/images/up_arrow.png"
+                        source: submissionDrawer.is_open ? "qrc:/resources/images/down_arrow.png" : "qrc:/resources/images/up_arrow.png"
                         width: 48
                         height: 48
                         fillMode: Image.PreserveAspectFit
@@ -262,7 +262,7 @@ Page {
                                 horizontalAlignment: Qt.AlignHCenter
                             }
                             Image {
-                                source: "/images/upload_file.png"
+                                source: "/resources/images/upload_file.png"
                                 width: 60
                                 height: 60
                             }

@@ -29,7 +29,7 @@ Item {
 
     signal conversationClicked(string conversation_id);
 
-    property string current_mail_image: "qrc:/images/mail.png";
+    property string current_mail_image: "qrc:/resources/images/mail.png";
     property bool is_hovered: false;
     property bool is_selected: element.ListView.isCurrentItem;
 
@@ -39,11 +39,11 @@ Item {
 
     function get_mail_image(state) {
         if (state === "read") {
-            return "qrc:/images/mail_open.png";
+            return "qrc:/resources/images/mail_open.png";
         } else if (state === "archived") {
-            return "qrc:/images/box.png";
+            return "qrc:/resources/images/box.png";
         } else { // unread
-            return "qrc:/images/mail.png";
+            return "qrc:/resources/images/mail.png";
         }
     }
 

@@ -2244,7 +2244,7 @@ bool EX_Canvas::pullMessages(QString scope)
         // "subscribed":true,"private":false,"starred":false,"properties":[],
         // "audience":[1],
         // "audience_contexts":{"courses":{"26664700000000090":["TeacherEnrollment"]},
-        // "groups":{}},"avatar_url":"https://canvas.ed.dev/images/messages/avatar-50.png",
+        // "groups":{}},"avatar_url":"https://canvas.ed.dev/resources/images/messages/avatar-50.png",
         // "participants":[{"id":26664700000000083,"name":"Smith, Bob (s777777)"},
         // {"id":1,"name":"admin@ed"}],
         // "visible":true,"context_code":"course_26664700000000090",
@@ -2256,7 +2256,7 @@ bool EX_Canvas::pullMessages(QString scope)
         // "message_count":2,"subscribed":true,"private":false,"starred":false,
         // "properties":[],"audience":[1],
         // "audience_contexts":{"courses":{"26664700000000090":["TeacherEnrollment"]},
-        // "groups":{}},"avatar_url":"https://canvas.ed.dev/images/messages/avatar-50.png",
+        // "groups":{}},"avatar_url":"https://canvas.ed.dev/resources/images/messages/avatar-50.png",
         // "participants":[{"id":26664700000000083,"name":"Smith, Bob (s777777)"},
         // {"id":1,"name":"admin@ed"}],"visible":true,
         // "context_code":"course_26664700000000090","context_name":"TestMathCourse"}]

@@ -36,7 +36,7 @@ Item {
     signal replyClicked(string message_id);
 
     property string message_participants: "Smith, Bob (s777777), Instructor1"
-    property string current_mail_image: "qrc:/images/mail.png";
+    property string current_mail_image: "qrc:/resources/images/mail.png";
     property bool is_hovered: false;
     property bool is_reply_hovered: false;
     property bool is_selected: element.ListView.isCurrentItem;
@@ -90,7 +90,7 @@ Item {
                         horizontalAlignment: Image.AlignHCenter;
                         width:48;
                         fillMode: Image.PreserveAspectFit;
-                        source: "qrc:/images/default_avatar.png";
+                        source: "qrc:/resources/images/default_avatar.png";
                     }
 
                 }
@@ -187,7 +187,7 @@ Item {
                         horizontalAlignment: Image.AlignHCenter;
                         height: 25;
                         fillMode: Image.PreserveAspectFit;
-                        source: "qrc:/images/upload_file.png";
+                        source: "qrc:/resources/images/upload_file.png";
                         visible: message_id === "<queued>" ? true : false;
 
                         ToolTip {
@@ -204,7 +204,7 @@ Item {
                         horizontalAlignment: Image.AlignHCenter;
                         height: 25;
                         fillMode: Image.PreserveAspectFit;
-                        source: "qrc:/images/reply.png";
+                        source: "qrc:/resources/images/reply.png";
                         visible: message_id === "<queued>" ? false : true;
                         Rectangle {
                             anchors.fill: parent;

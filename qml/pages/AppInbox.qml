@@ -150,7 +150,7 @@ Page {
             }
 
             Image {
-                source: "qrc:/images/new_message.png"
+                source: "qrc:/resources/images/new_message.png"
                 anchors.fill: parent;
                 fillMode: Image.PreserveAspectFit;
             }
