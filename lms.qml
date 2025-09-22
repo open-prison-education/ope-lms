@@ -186,7 +186,7 @@ ApplicationWindow {
                 //                    }
 
                 //                    contentItem: Image {
-                //                        source: "qrc:/images/sync.png"
+                //                        source: "qrc:/resources/images/sync.png"
                 //                        width: tbSyncWithCanvas.width;
                 //                        height: tbSyncWithCanvas.height;
                 //                    }
@@ -314,7 +314,7 @@ ApplicationWindow {
 
                         contentItem: Item {
                             Image {
-                                source: "qrc:/images/global_nav_maximize.png";
+                                source: "qrc:/resources/images/global_nav_maximize.png";
                                 width: parent.width;
                                 //height: 74;
                                 fillMode: Image.PreserveAspectFit
@@ -424,7 +424,7 @@ ApplicationWindow {
 
                         contentItem: Item {
                             Image {
-                                source: "qrc:/images/global_nav_canvas.png";
+                                source: "qrc:/resources/images/global_nav_canvas.png";
                                 width: 74;
                                 height: 74;
                                 fillMode: Image.PreserveAspectFit
@@ -494,7 +494,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_account_image
-                                source: "qrc:/images/global_nav_avatar-50.png";
+                                source: "qrc:/resources/images/global_nav_avatar-50.png";
                                 width: 64;
                                 height: 64;
                                 fillMode: Image.PreserveAspectFit;
@@ -576,7 +576,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_dashboard_image
-                                source: "qrc:/images/global_nav_dashboard.png";
+                                source: "qrc:/resources/images/global_nav_dashboard.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -657,7 +657,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_courses_image
-                                source: "qrc:/images/global_nav_courses.png";
+                                source: "qrc:/resources/images/global_nav_courses.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -738,7 +738,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_calendar_image
-                                source: "qrc:/images/global_nav_calendar.png";
+                                source: "qrc:/resources/images/global_nav_calendar.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -820,7 +820,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_inbox_image
-                                source: "qrc:/images/global_nav_inbox.png";
+                                source: "qrc:/resources/images/global_nav_inbox.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -903,7 +903,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_help_image
-                                source: "qrc:/images/global_nav_help.png";
+                                source: "qrc:/resources/images/global_nav_help.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -986,7 +986,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_sync_w_canvas_image
-                                source: "qrc:/images/global_nav_sync.png";
+                                source: "qrc:/resources/images/global_nav_sync.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -1084,7 +1084,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_minimize_image
-                                source: "qrc:/images/global_nav_minimize.png";
+                                source: "qrc:/resources/images/global_nav_minimize.png";
                                 width: 34;
                                 height: 34;
                                 fillMode: Image.PreserveAspectFit;

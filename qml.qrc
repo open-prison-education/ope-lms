@@ -32,7 +32,7 @@
         <file>translations_en.qm</file>
         <file>qml/pages/AppDashboardPage.qml</file>
     </qresource>
-    <qresource prefix="/images/">
+    <qresource prefix="/">
         <file>resources/images/blue-folder.png</file>
         <file>resources/images/blue_sync.png</file>
         <file>resources/images/upload_file.png</file>
