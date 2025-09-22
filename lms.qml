@@ -13,7 +13,9 @@ import QtWebSockets 1.1
 import cm.WebSocketTransport 1.0
 
 import com.openprisoneducation.ope 1.0
-import "App.js" as App
+import "resources/scripts/App.js" as App
+import "qml/pages" as Pages
+import "qml/components" as Components
 
 ApplicationWindow {
     visible: true;
@@ -184,7 +186,7 @@ ApplicationWindow {
                 //                    }
 
                 //                    contentItem: Image {
-                //                        source: "qrc:/images/sync.png"
+                //                        source: "qrc:/resources/images/sync.png"
                 //                        width: tbSyncWithCanvas.width;
                 //                        height: tbSyncWithCanvas.height;
                 //                    }
@@ -206,7 +208,7 @@ ApplicationWindow {
                     Layout.preferredHeight: parent.height
                     Layout.minimumWidth: width
 
-                    AppCourseSelector {
+                    Pages.AppCourseSelector {
                         id: appCourseSelector;
                         anchors.fill: parent;
                         global: main_window;
@@ -312,7 +314,7 @@ ApplicationWindow {
 
                         contentItem: Item {
                             Image {
-                                source: "qrc:/images/global_nav_maximize.png";
+                                source: "qrc:/resources/images/global_nav_maximize.png";
                                 width: parent.width;
                                 //height: 74;
                                 fillMode: Image.PreserveAspectFit
@@ -422,7 +424,7 @@ ApplicationWindow {
 
                         contentItem: Item {
                             Image {
-                                source: "qrc:/images/global_nav_canvas.png";
+                                source: "qrc:/resources/images/global_nav_canvas.png";
                                 width: 74;
                                 height: 74;
                                 fillMode: Image.PreserveAspectFit
@@ -492,7 +494,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_account_image
-                                source: "qrc:/images/global_nav_avatar-50.png";
+                                source: "qrc:/resources/images/global_nav_avatar-50.png";
                                 width: 64;
                                 height: 64;
                                 fillMode: Image.PreserveAspectFit;
@@ -574,7 +576,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_dashboard_image
-                                source: "qrc:/images/global_nav_dashboard.png";
+                                source: "qrc:/resources/images/global_nav_dashboard.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -655,7 +657,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_courses_image
-                                source: "qrc:/images/global_nav_courses.png";
+                                source: "qrc:/resources/images/global_nav_courses.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -736,7 +738,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_calendar_image
-                                source: "qrc:/images/global_nav_calendar.png";
+                                source: "qrc:/resources/images/global_nav_calendar.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -818,7 +820,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_inbox_image
-                                source: "qrc:/images/global_nav_inbox.png";
+                                source: "qrc:/resources/images/global_nav_inbox.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -901,7 +903,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_help_image
-                                source: "qrc:/images/global_nav_help.png";
+                                source: "qrc:/resources/images/global_nav_help.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -984,7 +986,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_sync_w_canvas_image
-                                source: "qrc:/images/global_nav_sync.png";
+                                source: "qrc:/resources/images/global_nav_sync.png";
                                 width: 54;
                                 height: 54;
                                 fillMode: Image.PreserveAspectFit;
@@ -1082,7 +1084,7 @@ ApplicationWindow {
                         contentItem: Item {
                             Image {
                                 id: gnav_minimize_image
-                                source: "qrc:/images/global_nav_minimize.png";
+                                source: "qrc:/resources/images/global_nav_minimize.png";
                                 width: 34;
                                 height: 34;
                                 fillMode: Image.PreserveAspectFit;
@@ -1352,7 +1354,7 @@ ApplicationWindow {
 
 
 
-                                AppSideBar {
+                                Pages.AppSideBar {
                                     id: appSideBar
                                     anchors.fill: parent
 
@@ -1469,7 +1471,7 @@ ApplicationWindow {
 
     Component {
         id: appDashboardView
-        AppDashboardPage {
+        Pages.AppDashboardPage {
             global: main_window;
 
             onCourseClicked: (course_id, course_name, course_code) => {
@@ -1495,7 +1497,7 @@ ApplicationWindow {
     Component {
 
         id: appHomePageView
-        AppHomePage {
+        Pages.AppHomePage {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1509,7 +1511,7 @@ ApplicationWindow {
 
     Component {
         id: appWikiPageView
-        AppWikiPage {
+        Pages.AppWikiPage {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1521,7 +1523,7 @@ ApplicationWindow {
 
     Component {
         id: appPagesView
-        AppPages {
+        Pages.AppPages {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1537,7 +1539,7 @@ ApplicationWindow {
 
     Component {
         id: appFilesView
-        AppFiles {
+        Pages.AppFiles {
             global: main_window;
             current_course_id: main_window.current_course_id
             Component.onCompleted: {
@@ -1548,7 +1550,7 @@ ApplicationWindow {
 
     Component {
         id: appAssignmentsListView
-        AppAssignments {
+        Pages.AppAssignments {
             global: main_window;
             current_assignent_id: main_window.current_assignment_id;
             current_course_id: main_window.current_course_id;
@@ -1565,7 +1567,7 @@ ApplicationWindow {
 
     Component {
         id: appAssignmentPage
-        AppAssignmentPage {
+        Pages.AppAssignmentPage {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_assignment_id: main_window.current_assignment_id;
@@ -1578,7 +1580,7 @@ ApplicationWindow {
 
     Component {
         id: appModulesListView
-        AppModules {
+        Pages.AppModules {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_page_url: main_window.current_page_url;
@@ -1602,7 +1604,7 @@ ApplicationWindow {
 
     Component {
         id: appAnnouncementsView
-        AppAnnouncements {
+        Pages.AppAnnouncements {
             global: main_window;
             current_course_id: main_window.current_course_id;
             Component.onCompleted: {
@@ -1613,7 +1615,7 @@ ApplicationWindow {
 
     Component {
         id: appInboxView
-        AppInbox {
+        Pages.AppInbox {
             global: main_window;
             current_course_id: main_window.current_course_id;
             Component.onCompleted: {
@@ -1625,7 +1627,7 @@ ApplicationWindow {
 
     Component {
         id: appQuizzesView
-        AppQuizzes {
+        Pages.AppQuizzes {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_quiz_id: main_window.current_quiz_id;
@@ -1641,7 +1643,7 @@ ApplicationWindow {
 
     Component {
         id: appDiscussionsView
-        AppDiscussions {
+        Pages.AppDiscussions {
             global: main_window;
             current_course_id: main_window.current_course_id;
             current_discussion_id: main_window.current_discussion_id;
@@ -1677,7 +1679,7 @@ ApplicationWindow {
             Layout.fillHeight: true;
             color: App.page_bg_color;
 
-            AppSyncPage {
+            Pages.AppSyncPage {
                 //anchors.fill: parent;
                 width: syncDrawer.width;
                 height: syncDrawer.height;
