@@ -42,6 +42,13 @@ bool APP_DB::init_db(QString db_file)
 
     ret = _db.open();
 
+    // Ensure UTF-8 encoding for proper Unicode support
+    if (ret) {
+        QSqlQuery query(_db);
+        query.exec("PRAGMA encoding = 'UTF-8'");
+        query.exec("PRAGMA foreign_keys = ON");
+    }
+
     QSqlQuery query;
     QString sql;
     //QSqlTableModel *model;

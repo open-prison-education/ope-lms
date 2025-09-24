@@ -12,6 +12,8 @@
 #include <QDesktopServices>
 #include <QStandardPaths>
 #include <QCryptographicHash>
+#include <QTextCodec>
+#include <QRegExp>
 
 #include "db.h"
 #include "cm/cm_httpserver.h"

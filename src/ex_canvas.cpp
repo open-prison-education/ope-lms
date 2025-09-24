@@ -3058,7 +3058,12 @@ bool EX_Canvas::queueAssignmentFile(QString course_id, QString assignment_id, QS
 
             QFileInfo fi = QFileInfo(file_url);
 
-            QString tmp_file = QString::number(QDateTime::currentSecsSinceEpoch()) + "_" +fi.fileName();
+            // Ensure file name is safe for filesystem (handle Unicode properly)
+            QString safe_filename = fi.fileName();
+            // Replace problematic characters but preserve Unicode
+            safe_filename = safe_filename.replace(QRegExp("[<>:\"/\\\\|?*]"), "_");
+            
+            QString tmp_file = QString::number(QDateTime::currentSecsSinceEpoch()) + "_" + safe_filename;
 
             QString tmp_file_path = cache_path.absolutePath() + "/" + tmp_file;
             // Copy file to temp location
@@ -3751,6 +3756,7 @@ bool EX_Canvas::updateDownloadLinks()
         q2.bindValue(":new_url", new_url);
         if (!q2.exec()) {
             qDebug() << "SQL Error!! " << q2.lastError() << " on " << q2.lastQuery();
+            qDebug() << "File tag: " << file_tag << " New URL: " << new_url;
         }
 
         sql = "UPDATE pages SET body=REPLACE(body, :file_tag, :new_url)";
@@ -3760,6 +3766,7 @@ bool EX_Canvas::updateDownloadLinks()
         q3.bindValue(":new_url", new_url);
         if(!q3.exec()) {
             qDebug() << "SQL Error!! " << q3.lastError() << " on " << q3.lastQuery();
+            qDebug() << "File tag: " << file_tag << " New URL: " << new_url;
         }
 
         // Write changes to db
@@ -4206,6 +4213,24 @@ QSqlRecord EX_Canvas::pullSinglePage(QString course_id, QString page_url)
         page_body = page_object["body"].toString("");
         if (page_object["locked_for_user"].toBool() == true) {
             page_body = page_object["lock_explanation"].toString("Page Locked - see instructor");
+        }
+        
+        // Validate Unicode content
+        if (!page_body.isEmpty()) {
+            // Check if the content contains valid UTF-8
+            QTextCodec::ConverterState state;
+            QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+            codec->toUnicode(page_body.toUtf8(), page_body.length(), &state);
+            if (state.invalidChars > 0) {
+                qDebug() << "Warning: Page content contains invalid UTF-8 characters: " << page_url;
+                // Try to fix by converting from Latin-1 if possible
+                QTextCodec *latin1 = QTextCodec::codecForName("ISO-8859-1");
+                if (latin1) {
+                    QString fixed_body = latin1->toUnicode(page_body.toUtf8());
+                    qDebug() << "Attempting to fix encoding for page: " << page_url;
+                    page_body = fixed_body;
+                }
+            }
         }
     }
 
