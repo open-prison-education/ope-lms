@@ -5,9 +5,9 @@ EX_Canvas::EX_Canvas(QObject *parent, APP_DB *db, QSettings *app_settings, QStri
     QObject(parent)
 {
     canvas_client_id = "1";
-    canvas_client_secret = "hVGyxhHAKulUTZwAExbKALBpZaHTGDBkoSS7DpsvRpY1H7yzoMfnI5NLnC6t5A0Q";
+    canvas_client_secret = "";
     canvas_access_token = "";
-    canvas_url = "https://canvas.ed";
+    canvas_url = "";
     _localhost_url = localhost_url;
 
     qmlRegisterType<EX_Canvas>("com.openprisoneducation.ope", 1, 0, "Canvas");
