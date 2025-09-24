@@ -3061,7 +3061,8 @@ bool EX_Canvas::queueAssignmentFile(QString course_id, QString assignment_id, QS
             // Ensure file name is safe for filesystem (handle Unicode properly)
             QString safe_filename = fi.fileName();
             // Replace problematic characters but preserve Unicode
-            safe_filename = safe_filename.replace(QRegExp("[<>:\"/\\\\|?*]"), "_");
+            QRegularExpression invalidChars("[<>:\"/\\\\|?*]");
+            safe_filename = safe_filename.replace(invalidChars, "_");
             
             QString tmp_file = QString::number(QDateTime::currentSecsSinceEpoch()) + "_" + safe_filename;
 
@@ -4217,19 +4218,17 @@ QSqlRecord EX_Canvas::pullSinglePage(QString course_id, QString page_url)
         
         // Validate Unicode content
         if (!page_body.isEmpty()) {
-            // Check if the content contains valid UTF-8
-            QTextCodec::ConverterState state;
-            QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-            codec->toUnicode(page_body.toUtf8(), page_body.length(), &state);
-            if (state.invalidChars > 0) {
-                qDebug() << "Warning: Page content contains invalid UTF-8 characters: " << page_url;
-                // Try to fix by converting from Latin-1 if possible
-                QTextCodec *latin1 = QTextCodec::codecForName("ISO-8859-1");
-                if (latin1) {
-                    QString fixed_body = latin1->toUnicode(page_body.toUtf8());
-                    qDebug() << "Attempting to fix encoding for page: " << page_url;
-                    page_body = fixed_body;
-                }
+            // Check if the content contains valid UTF-8 using Qt 6 methods
+            QByteArray utf8Data = page_body.toUtf8();
+            QString decoded = QString::fromUtf8(utf8Data);
+            
+            // If the decoded string doesn't match the original, there might be encoding issues
+            if (decoded != page_body) {
+                qDebug() << "Warning: Potential encoding issue detected for page: " << page_url;
+                // Try to convert from Latin-1 if UTF-8 fails
+                QString fixed_body = QString::fromLatin1(utf8Data);
+                qDebug() << "Attempting to fix encoding for page: " << page_url;
+                page_body = fixed_body;
             }
         }
     }
