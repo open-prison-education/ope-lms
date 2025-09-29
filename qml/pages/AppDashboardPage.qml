@@ -162,10 +162,9 @@ Page {
 
                                 //Layout.alignment: Qt.AlignTop;
                                 Column {
-
+                                    property int textWidth: parent.width
                                     Text {
                                         id: item_name_text;
-                                        //anchors.fill: parent;
                                         font.family: App.global_font_family;
                                         font.pixelSize: 14; //App.global_font_size;
                                         font.bold: true;
@@ -173,30 +172,25 @@ Page {
                                         text: name;
                                         color: App.text_color;
                                         padding: 3;
-                                        //renderType: Text.NativeRendering;
-//                                        Accessible.name: item_name_text.text;
-//                                        Accessible.description: item_name_text.text;
-//                                        Accessible.role: Accessible.Button;
-
-
+                                        wrapMode: Text.WordWrap;
+                                        width: parent.textWidth;
+                                        maximumLineCount: 3;
+                                        elide: Text.ElideRight;
                                     }
                                     Text {
                                         id: item_course_text;
-                                        //anchors.fill: parent;
                                         font.family: App.global_font_family;
                                         font.pixelSize: 16; //App.global_font_size;
-                                        //font.bold: true;
                                         textFormat: Text.StyledText;
                                         text: course_code
                                         color: App.text_color;
                                         padding: 3;
-                                        //renderType: Text.NativeRendering;
-//                                        Accessible.name: item_course_text.text;
-//                                        Accessible.description: item_course_text.text;
-//                                        Accessible.role: Accessible.StaticText;
+                                        wrapMode: Text.WordWrap;
+                                        width: parent.textWidth;
+                                        maximumLineCount: 1;
+                                        elide: Text.ElideRight;
                                     }
                                 }
-
                             }
 
 
