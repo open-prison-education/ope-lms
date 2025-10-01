@@ -135,6 +135,57 @@ For detailed instructions on building QtWebEngine with proprietary codecs suppor
 
 ## Configuration
 
+### Data Storage Configuration
+
+The application uses a JSON configuration file to determine where to store data files, logs, and cached content. This allows IT staff to easily configure the application to use a specific drive without requiring application interface changes.
+
+#### Configuration File
+
+**File Location**: `config.json` (placed in the same directory as the application executable)
+
+**Format**:
+```json
+{
+  "appdata_drive": "D"
+}
+```
+
+**Configuration Options**:
+- `appdata_drive`: The drive letter where application data should be stored (e.g., "D", "E", "F")
+
+#### How It Works
+
+1. **On Application Start**: The app reads `config.json` from the application directory
+2. **Drive Validation**: Checks if the specified drive exists and has write permissions
+3. **Data Path**: Uses `{drive}:/ProgramData/OPE` as the base data directory
+4. **Error Handling**: If the config file is missing, invalid, or the drive is inaccessible, the application shows an error message and exits
+
+#### Example Configurations
+
+**Use D: drive**:
+```json
+{
+  "appdata_drive": "D"
+}
+```
+
+**Use E: drive**:
+```json
+{
+  "appdata_drive": "E"
+}
+```
+
+#### Error Scenarios
+
+The application will show error messages and exit in these cases:
+
+1. **Missing config.json**: "Configuration file not found. Please ensure config.json exists in the application directory."
+2. **Invalid JSON**: "Invalid configuration file format. Please check config.json syntax."
+3. **Missing drive field**: "Configuration file missing 'appdata_drive' field."
+4. **Drive not found**: "Drive D: not found. Please check the drive letter in config.json."
+5. **No write permissions**: "No write access to drive D: Please check drive permissions or contact IT support."
+
 ### Application Settings
 
 The application stores settings in the system registry
@@ -149,7 +200,7 @@ The application stores settings in the system registry
 
 - **Database**: SQLite database for local data storage
 - **Cache Directory**: Stores downloaded course content
-- **Logs**: Application logs stored in system-appropriate location
+- **Logs**: Application logs stored in the configured drive location
 
 ## Usage
 
@@ -197,7 +248,9 @@ When online, the application can:
 ### Log Files
 
 Check log files in:
-- **Windows**: `C:\ProgramData\OPE\tmp\log\lms_app_debug.log`
+- **Windows**: `{configured_drive}:\ProgramData\OPE\tmp\log\lms_app_debug.log`
+  - The exact path depends on the drive specified in `config.json`
+  - Example: If `config.json` specifies `"appdata_drive": "D"`, logs will be at `D:\ProgramData\OPE\tmp\log\lms_app_debug.log`
 
 ## Contributing
 

@@ -58,18 +58,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("openprisoneducation.com");
     QCoreApplication::setApplicationName("OPELMS");
 
-    // Change cache/local data paths to point to programdata folder instead of user account - allows syncing/usage before user has logged in
-#if defined( Q_OS_WIN )
-    // Set environment so that it uses the new path
-    pgdata_path = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1); // grab 2nd item
-    // Remove app name (c:/programdata/ope/opelms -> c:/programdata/ope)
-    pgdata_path = pgdata_path.replace("/OPELMS", "");
-    //qDebug() << "PG Data Path: " << pgdata_path;
-    QString cache_path = qEnvironmentVariable("QML_DISK_CACHE_PATH", pgdata_path + "/tmp/qmlcache/");
-    //qDebug() << "Cache Path: " << cache_path;
-    qputenv("QML_DISK_CACHE_PATH", cache_path.toStdString());
-
-#endif
+    // Data path will be determined by AppModule from config.json
+    // Leave pgdata_path empty so AppModule handles config reading
+    pgdata_path = "";
 
     //QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     // Not needed in qt6
@@ -84,18 +75,10 @@ int main(int argc, char *argv[])
     //QtWebEngine::initialize();
     //QtWebView::initialize();
 
-    log_file_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/lms_app_debug.log";
-    // In windows - put it in programdata/ope/tmp/logs/debug.log
-    if (QOperatingSystemVersion::currentType() == QOperatingSystemVersion::Windows) {
-        // returns ("c:/users/<USER>/AppData/Local/<APPNAME>", "c:/programdata/<APPNAME>")
-        // NOTE - Will need to adjust this if
-        //QDir d = QDir(QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1));
-        //qDebug() << "AppConfigLocation: " << d.path();
-        //d.cdUp(); // Move back to c:/programdata
-        //log_file_path = d.path() + "/tmp/log/lms_app_debug.log";
-        log_file_path = pgdata_path + "/tmp/log/lms_app_debug.log";
-    }
-    qDebug() << "Logging to: " << log_file_path;
+    // Log file path will be set after AppModule determines the data path from config.json
+    // For now, use a temporary path that will be updated by AppModule
+    log_file_path = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/lms_app_debug_temp.log";
+    qDebug() << "Temporary logging to: " << log_file_path;
 
     // Are we running in the Qt Creator IDE?
     QByteArray envVar = qgetenv("QTDIR");
