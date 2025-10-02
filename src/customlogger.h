@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QHash>
 #include <QTime>
+#include <QDateTime>
 #include <QTextStream>
 
 QTextStream& qStdout();

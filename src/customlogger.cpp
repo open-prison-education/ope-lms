@@ -37,8 +37,8 @@ void customLogOutput(QtMsgType type, const QMessageLogContext &context,
                                             {QtCriticalMsg, "Critical"},
                                             {QtFatalMsg, "Fatal"}});
     QByteArray localMsg = msg.toLocal8Bit();
-    QTime time = QTime::currentTime();
-    QString formattedTime = time.toString("hh:mm:ss.zzz");
+    QDateTime dateTime = QDateTime::currentDateTime();
+    QString formattedTime = dateTime.toString("MM/dd/yyyy hh:mm:ss");
     QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
     QString logLevelName = msgLevelHash[type];
     QByteArray logLevelMsg = logLevelName.toLocal8Bit();
