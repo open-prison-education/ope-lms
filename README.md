@@ -155,10 +155,11 @@ The application uses a JSON configuration file to determine where to store data 
 
 #### How It Works
 
-1. **On Application Start**: The app reads `config.json` from the application directory
-2. **Drive Validation**: Checks if the specified drive exists and has write permissions
+1. **Configuration Loading**: The `ConfigManager` singleton class loads and validates the configuration at startup
+2. **Drive Validation**: The application checks if the specified drive exists and has write permissions
 3. **Data Path**: Uses `{drive}:/ProgramData/OPE` as the base data directory
-4. **Error Handling**: If the config file is missing, invalid, or the drive is inaccessible, the application shows an error message and exits
+4. **Error Handling**: If configuration fails, the application shows an error message and exits
+
 
 #### Example Configurations
 

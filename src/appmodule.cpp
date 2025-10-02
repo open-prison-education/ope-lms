@@ -23,29 +23,8 @@ AppModule::AppModule(QQmlApplicationEngine *parent, QString program_data_path) :
 
 
     nam_factory = new OPENetworkAccessManagerFactory;
-    if (program_data_path == "") {
-        // Read drive from config file
-        QString configDrive = readConfigDrive();
-        if (configDrive.isEmpty()) {
-            // Error already shown by readConfigDrive, just return
-            return;
-        }
-        
-        // Validate the configured drive
-        if (!validateDrive(configDrive)) {
-            // Error already shown by validateDrive, just return
-            return;
-        }
-        
-        // Build the data path using the configured drive
-        program_data_path = configDrive + ":/ProgramData/OPE";
-        qDebug() << "Using configured data path: " << program_data_path;
-    }
     this->data_path = program_data_path;
     
-    // Update log file path to use the determined data path
-    updateLogFilePath();
-
     parent->setNetworkAccessManagerFactory(nam_factory);
     parent->rootContext()->engine()->setNetworkAccessManagerFactory(nam_factory);
 
@@ -794,126 +773,6 @@ void AppModule::sslErrorHandler(QNetworkReply *reply, QList<QSslError> errors)
 QString AppModule::get_current_student_user()
 {
     return _app_settings->value("student/user_name", "").toString();
-}
-
-QString AppModule::readConfigDrive()
-{
-    // Get the application directory path
-    QString appDir = QCoreApplication::applicationDirPath();
-    QString configPath = appDir + "/config.json";
-    
-    qDebug() << "Looking for config file at: " << configPath;
-    
-    // Check if config file exists
-    QFileInfo configFile(configPath);
-    if (!configFile.exists()) {
-        showConfigError("Configuration file not found. Please ensure config.json exists in the application directory.");
-        return "";
-    }
-    
-    // Read the config file
-    QFile file(configPath);
-    if (!file.open(QIODevice::ReadOnly)) {
-        showConfigError("Cannot open configuration file. Please check file permissions.");
-        return "";
-    }
-    
-    QByteArray data = file.readAll();
-    file.close();
-    
-    // Parse JSON
-    QJsonParseError parseError;
-    QJsonDocument doc = QJsonDocument::fromJson(data, &parseError);
-    
-    if (parseError.error != QJsonParseError::NoError) {
-        showConfigError("Invalid configuration file format. Please check config.json syntax.");
-        return "";
-    }
-    
-    QJsonObject obj = doc.object();
-    if (!obj.contains("appdata_drive")) {
-        showConfigError("Configuration file missing 'appdata_drive' field.");
-        return "";
-    }
-    
-    QString driveLetter = obj["appdata_drive"].toString();
-    if (driveLetter.isEmpty()) {
-        showConfigError("Configuration file 'appdata_drive' field is empty.");
-        return "";
-    }
-    
-    // Clean up drive letter (remove colon if present)
-    driveLetter = driveLetter.toUpper().replace(":", "");
-    
-    qDebug() << "Config file specifies drive: " << driveLetter;
-    return driveLetter;
-}
-
-bool AppModule::validateDrive(QString driveLetter)
-{
-    if (driveLetter.isEmpty()) {
-        return false;
-    }
-    
-    // Check if drive exists
-    QString drivePath = driveLetter + ":/";
-    QFileInfo driveInfo(drivePath);
-    if (!driveInfo.exists()) {
-        showConfigError("Drive " + driveLetter + ": not found. Please check the drive letter in config.json.");
-        return false;
-    }
-    
-    // Test write permissions by trying to create a test directory
-    QString testPath = drivePath + "ProgramData/OPE/.write_test";
-    QDir testDir;
-    if (!testDir.mkpath(QFileInfo(testPath).absolutePath())) {
-        showConfigError("Cannot create directories on drive " + driveLetter + ": Please check drive permissions or contact IT support.");
-        return false;
-    }
-    
-    // Test write permissions by creating a temporary file
-    QFile testFile(testPath);
-    if (!testFile.open(QIODevice::WriteOnly)) {
-        showConfigError("No write access to drive " + driveLetter + ": Please check drive permissions or contact IT support.");
-        return false;
-    }
-    testFile.close();
-    testFile.remove(); // Clean up test file
-    
-    qDebug() << "Drive " << driveLetter << ": validated successfully";
-    return true;
-}
-
-void AppModule::showConfigError(QString message)
-{
-    qDebug() << "CONFIG ERROR: " << message;
-    
-    // Show error message box
-    QMessageBox msgBox;
-    msgBox.setIcon(QMessageBox::Critical);
-    msgBox.setWindowTitle("Configuration Error");
-    msgBox.setText(message);
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.exec();
-    
-    // Exit the application
-    QCoreApplication::quit();
-}
-
-void AppModule::updateLogFilePath()
-{
-    // Update the global log file path to use the current data path
-    extern QString log_file_path;
-    QString newLogPath = data_path + "/tmp/log/lms_app_debug.log";
-    
-    // Create the log directory if it doesn't exist
-    QDir logDir(data_path + "/tmp/log");
-    if (!logDir.exists()) {
-        logDir.mkpath(logDir.path());
-    }
-    
-    log_file_path = newLogPath;
-    qDebug() << "Updated log file path to: " << log_file_path;
 }
 
 void AppModule::sendAccessibilityEvent(QQuickItem *item, QAccessible::Event event_reason)

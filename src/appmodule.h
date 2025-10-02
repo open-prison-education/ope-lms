@@ -38,9 +38,6 @@
 #include <QSslConfiguration>
 #include <QApplication>
 #include <QMessageBox>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QFileInfo>
 
 #ifdef ANDROID
 #include <QAndroidJniObject>
@@ -238,12 +235,6 @@ public slots:
     void sslErrorHandler(QNetworkReply *reply, QList<QSslError> errors);
 
     QString get_current_student_user();
-
-    // Configuration management
-    QString readConfigDrive();
-    bool validateDrive(QString driveLetter);
-    void showConfigError(QString message);
-    void updateLogFilePath();
 
     void sendAccessibilityEvent(QQuickItem *item, QAccessible::Event event_reason);
 
