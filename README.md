@@ -9,7 +9,7 @@ The Open Prison Education Learning Management System (OPE LMS) is built using Qt
 - **Offline Canvas Integration**: Sync with Canvas LMS to download course materials for offline viewing
 - **Secure Environment**: Designed for use in correctional facilities with appropriate security measures
 - **Local Web Server**: Built-in HTTP server to serve cached content locally
-- **Cross-Platform Support**: Runs on Windows
+- **Platform Support**: Runs on Windows 10/11
 - **Modern UI**: Built with Qt Quick Controls 2 and QML for a responsive user interface
 
 ## Features
