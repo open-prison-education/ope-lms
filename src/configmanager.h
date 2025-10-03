@@ -32,7 +32,7 @@ public:
     
     /**
      * @brief Load and validate configuration from config.json
-     * @param showErrors If true, shows error dialogs. If false, only logs errors (for command line mode)
+     * @param showErrors If true, shows error dialogs using showConfigError function.
      * @return true if configuration loaded successfully, false otherwise
      */
     bool loadConfig(bool showErrors = true);
@@ -57,7 +57,7 @@ public:
 
 private:
     // Private constructor for singleton pattern
-    ConfigManager() = default;
+    ConfigManager() = default; 
     
     // Disable copy constructor and assignment operator
     ConfigManager(const ConfigManager&) = delete;
@@ -65,7 +65,7 @@ private:
     
     /**
      * @brief Read the drive letter from config.json
-     * @param showErrors If true, shows error dialogs. If false, only logs errors
+     * @param showErrors If true, shows error dialogs using showConfigError function.
      * @return The drive letter, or empty string if error
      */
     QString readConfigDrive(bool showErrors = true);
@@ -73,7 +73,7 @@ private:
     /**
      * @brief Validate that the specified drive exists and is writable
      * @param driveLetter The drive letter to validate
-     * @param showErrors If true, shows error dialogs. If false, only logs errors
+     * @param showErrors If true, shows error dialogs using showConfigError function.  
      * @return true if drive is valid and writable
      */
     bool validateDrive(const QString& driveLetter, bool showErrors = true);
@@ -81,7 +81,7 @@ private:
     /**
      * @brief Show configuration error message and exit application
      * @param message The error message to display
-     * @param showErrors If true, shows error dialogs. If false, only logs errors
+     * @param showErrors If true, shows error dialogs.
      */
     void showConfigError(const QString& message, bool showErrors = true);
     
