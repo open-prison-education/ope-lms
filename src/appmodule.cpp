@@ -23,14 +23,8 @@ AppModule::AppModule(QQmlApplicationEngine *parent, QString program_data_path) :
 
 
     nam_factory = new OPENetworkAccessManagerFactory;
-    if (program_data_path == "") {
-        // Get the standard program data folder to store things in.
-        program_data_path = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1); // grab 2nd item
-        // Remove app name (c:/programdata/ope/opelms -> c:/programdata/ope)
-        program_data_path = program_data_path.replace("/OPELMS", "");
-    }
     this->data_path = program_data_path;
-
+    
     parent->setNetworkAccessManagerFactory(nam_factory);
     parent->rootContext()->engine()->setNetworkAccessManagerFactory(nam_factory);
 
