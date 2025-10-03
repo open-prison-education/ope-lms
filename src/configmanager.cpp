@@ -136,11 +136,14 @@ bool ConfigManager::validateDrive(const QString& driveLetter, bool showErrors)
 
 void ConfigManager::showConfigError(const QString& message, bool showErrors)
 {
+    if (showErrors) {
+#if defined( Q_OS_WIN )
     MessageBoxW(NULL,
                 reinterpret_cast<LPCWSTR>(message.utf16()),
-                L"Configuration Error",
-                MB_OK | MB_ICONERROR);
-
+                    L"Configuration Error",
+                    MB_OK | MB_ICONERROR);
+#endif
+    }
     // Exit the application
     QCoreApplication::quit();
 }
