@@ -33,6 +33,7 @@ CONFIG += console
 SOURCES += src/main.cpp \
     src/appmodule.cpp \
     src/customlogger.cpp \
+    src/configmanager.cpp \
     src/db.cpp \
     src/openetworkaccessmanagerfactory.cpp \
     src/ex_canvas.cpp \
@@ -93,6 +94,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     src/appmodule.h \
     src/customlogger.h \
+    src/configmanager.h \
     src/db.h \
     src/openetworkaccessmanagerfactory.h \
     src/ex_canvas.h \
@@ -130,7 +132,8 @@ DISTFILES += \
     lms.qml \
     not_credentialed.qml \
     qt.conf \
-    qtquickcontrols2.conf
+    qtquickcontrols2.conf \
+    config.json
 
 
 
@@ -162,7 +165,8 @@ copy_files.commands = $(COPY_DIR) \"$$shell_path($$PWD\\www_content)\" \"$$shell
     $(COPY_FILE) \"$$shell_path($$PWD\\resources\\scripts\\opeWebViewClient.js)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\web_content\\)\" && \
     $(COPY_FILE) \"$$shell_path($$PWD\\mime_types.csv)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
     $(COPY_FILE) \"$$shell_path($$PWD\\qt.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
-    $(COPY_FILE) \"$$shell_path($$PWD\\qtquickcontrols2.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\"
+    $(COPY_FILE) \"$$shell_path($$PWD\\qtquickcontrols2.conf)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\" && \
+    $(COPY_FILE) \"$$shell_path($$PWD\\config.json)\" \"$$shell_path($$OUT_PWD\\$$VARIANT\\)\"
 
 
 first.depends = $(first) copy_files
