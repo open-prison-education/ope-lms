@@ -249,7 +249,7 @@ When online, the application can:
 ### Log Files
 
 Check log files in:
-- **Windows**: `{configured_drive}:\ProgramData\OPE\tmp\log\lms_app_debug.log`
+- **Windows**: `{configured_drive}:\ProgramData\OPE\tmp\log\ope-lms.log`
   - The exact path depends on the drive specified in `config.json`
   - Example: If `config.json` specifies `"appdata_drive": "D"`, logs will be at `D:\ProgramData\OPE\tmp\log\ope-lms.log`
 
