@@ -75,7 +75,7 @@ Page {
             Rectangle {
                 id: item
                 Layout.fillWidth: true
-                width: parent.width
+                width: announcementsList.width
                 height: 85
                 implicitHeight: height
                 Layout.fillHeight: true
@@ -86,20 +86,24 @@ Page {
 
                 RowLayout {
                     anchors.fill: parent
+                    anchors.margins: 3
+                    width: parent.width
 
                     ColumnLayout
                     {
                         Layout.fillWidth: true
                         Layout.minimumWidth: 10
                         Layout.minimumHeight: 60
+                        Layout.maximumWidth: parent.width - 100
 
                         Text {
-                            height: 30
+                            Layout.fillWidth: true
                             verticalAlignment: Text.AlignVCenter
                             text: title
                             color: App.text_color;
                             font.pointSize: 12;
                             leftPadding: 3;
+                            wrapMode: Text.WordWrap;
                         }
                         Text {
                             height: 15
@@ -110,37 +114,31 @@ Page {
                             leftPadding: 3;
                         }
                         Text {
-                            height: 30
+                            Layout.fillWidth: true
                             text: message
                             color: App.text_color;
                             font.pointSize: 11;
                             leftPadding: 3;
+                            wrapMode: Text.WordWrap;
                         }
                     }
 
-                    Text {
-                        height: 15
-                        Layout.minimumHeight: 15
+                    ColumnLayout {
+                        Layout.minimumWidth: 100
+                        Layout.maximumWidth: 100
                         Layout.fillHeight: true
-                        Layout.minimumWidth: 30
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignRight
-                        text: posted_at
-                        color: App.text_color;
-                        font.pointSize: 9
-                        leftPadding: 3;
+                        
+                        Text {
+                            id:data_text
+                            Layout.fillWidth: true
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignRight
+                            text: posted_at
+                            color: App.text_color;
+                            font.pointSize: 9
+                            wrapMode: Text.WordWrap;
+                        }
                     }
-                    Text {
-                        height: 15
-                        Layout.minimumHeight: 15
-                        Layout.minimumWidth: 32
-                        text: "Att DL"
-                        color: App.text_color;
-                        font.pointSize: 9;
-                        leftPadding: 3;
-                    }
-
-
                 }
                 MouseArea {
                     anchors.fill: parent
