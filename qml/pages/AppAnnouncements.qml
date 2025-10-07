@@ -47,6 +47,37 @@ Page {
 
     }
 
+    function formatTimestamp(timestamp) {
+        // Parse ISO 8601 timestamp like "2025-10-02T18:39:49Z"
+        var date = new Date(timestamp);
+        
+        // Check if date is valid
+        if (isNaN(date.getTime())) {
+            return timestamp; // Return original if parsing fails
+        }
+        
+        // Format to "Oct 2, 2025, 11:39 AM"
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        
+        var month = months[date.getMonth()];
+        var day = date.getDate();
+        var year = date.getFullYear();
+        
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        
+        // Convert to 12-hour format
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 0 should be 12
+        
+        // Add leading zero to minutes if needed
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        
+        return month + " " + day + ", " + year + ", " + hours + ":" + minutes + " " + ampm;
+    }
+
 
 
     ListView {
@@ -75,7 +106,7 @@ Page {
             Rectangle {
                 id: item
                 Layout.fillWidth: true
-                width: parent.width
+                width: announcementsList.width
                 height: 85
                 implicitHeight: height
                 Layout.fillHeight: true
@@ -84,63 +115,67 @@ Page {
                 //opacity: 0.5
                 property int indexOfThisDelegate: index;
 
-                RowLayout {
+                ColumnLayout {
                     anchors.fill: parent
+                    anchors.margins: 3
+                    width: parent.width
 
-                    ColumnLayout
-                    {
+                    RowLayout {
                         Layout.fillWidth: true
-                        Layout.minimumWidth: 10
-                        Layout.minimumHeight: 60
+                        Layout.fillHeight: true
+                        
+                        ColumnLayout
+                        {
+                            Layout.fillWidth: true
+                            Layout.minimumWidth: 10
+                            Layout.minimumHeight: 60
+                            Layout.maximumWidth: parent.width - 120
 
-                        Text {
-                            height: 30
-                            verticalAlignment: Text.AlignVCenter
-                            text: title
-                            color: App.text_color;
-                            font.pointSize: 12;
-                            leftPadding: 3;
+                            Text {
+                                Layout.fillWidth: true
+                                verticalAlignment: Text.AlignVCenter
+                                text: title
+                                color: App.text_color;
+                                font.pointSize: 12;
+                                leftPadding: 3;
+                                wrapMode: Text.WordWrap;
+                            }
+                            Text {
+                                height: 15
+                                verticalAlignment: Text.AlignVCenter
+                                text: user_name
+                                color: App.text_color;
+                                font.pointSize: 9;
+                                leftPadding: 3;
+                            }
+                            Text {
+                                Layout.fillWidth: true
+                                text: message
+                                color: App.text_color;
+                                font.pointSize: 11;
+                                leftPadding: 3;
+                                wrapMode: Text.WordWrap;
+                            }
                         }
-                        Text {
-                            height: 15
-                            verticalAlignment: Text.AlignVCenter
-                            text: user_name
-                            color: App.text_color;
-                            font.pointSize: 9;
-                            leftPadding: 3;
-                        }
-                        Text {
-                            height: 30
-                            text: message
-                            color: App.text_color;
-                            font.pointSize: 11;
-                            leftPadding: 3;
+
+                        Item {
+                            Layout.minimumWidth: 115
+                            Layout.maximumWidth: 115
+                            Layout.fillHeight: true
                         }
                     }
-
+                    
                     Text {
-                        height: 15
-                        Layout.minimumHeight: 15
-                        Layout.fillHeight: true
-                        Layout.minimumWidth: 30
-                        verticalAlignment: Text.AlignVCenter
+                        id: data_text
+                        Layout.fillWidth: true
+                        verticalAlignment: Text.AlignBottom
                         horizontalAlignment: Text.AlignRight
-                        text: posted_at
+                        text: formatTimestamp(posted_at)
                         color: App.text_color;
                         font.pointSize: 9
-                        leftPadding: 3;
+                        wrapMode: Text.WordWrap;
+                        rightPadding: 3;
                     }
-                    Text {
-                        height: 15
-                        Layout.minimumHeight: 15
-                        Layout.minimumWidth: 32
-                        text: "Att DL"
-                        color: App.text_color;
-                        font.pointSize: 9;
-                        leftPadding: 3;
-                    }
-
-
                 }
                 MouseArea {
                     anchors.fill: parent
